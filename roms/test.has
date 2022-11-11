@@ -1,0 +1,130 @@
+.define testVar 0x1c ; not stored in ram, works as #define in c language
+
+.data singleInt 0x4f ; stored in ram, address defined by assembler
+.data singleIntCustomAddr $0x1f2e3d 0x0e ; stored in ram at custom address
+
+.data intArray 0x01, 0x02, 0x03, 0x04 ; stored in ram, address defined by assembler
+.data intArrayCustomAddr $0x2e1f00 0x51, 0xe2, 0x0f ; stored in ram at custom address
+ ; comment only test line
+.data string "hello" ; stored in ram, address defined by assembler
+.data string $0xff0102 "This is a long string stored in ram." ; stored in ram, custom address, error because alreadyExists
+
+:main ; mandatory, at 0x000400, if this line is missing, the program won't be assembled
+nop
+
+adc a, b
+adc c, 0x10
+adc d, $0xfe5c14
+
+add i,j
+add x,54
+add y,$0xa918ce
+
+and a,  b
+and c, 255
+and j,  $0x9ace2d
+
+cal [abc]
+cal $0xff00a1
+cal label_2 ; pc = 0x00ffa1
+
+clc
+cle
+cli
+cln
+cls
+clz
+clf
+
+cmp d, j
+cmp a, 14
+cmp j, [xib]
+
+:label_1
+dec i
+dec [abd]
+dec $0x2f1e5b
+
+hlt
+
+in c, d
+
+out d, c
+
+inc a
+inc [abc]
+inc $0x5d1f2e
+
+int 0x54
+
+irt
+
+:label_2 $0x00ffa1
+jmc [dbc]
+jmc $0x12b5d3
+
+jme [dbc]
+jme $0x12b5d3
+
+jmf [dbc]
+jmf $0x12b5d3
+
+jmk [dbc]
+jmk $0x12b5d3
+
+jmp [dbc]
+jmp $0x12b5d3
+
+jms [dbc]
+jms $0x12b5d3
+
+jmz [dbc]
+jmz $0x12b5d3
+
+jmn [dbc]
+jmn $0x12b5d3
+
+str d, [cid]
+str i, $0x2f1e3d
+
+lod d, [cid]
+lod i, $0x2f1e3d
+
+mov a, b
+mov c, 0x41
+mov d, string.msb ; d = 0xff (string variable most significant byte)
+mov i, string.mb  ; i = 0x01 (string variable middle byte)
+mov j, string.lsb ; j = 0x02 (string variable less significant byte)
+mov x, singleInt  ; x = 0x4f
+
+not d
+not $0x12b5d3
+
+or i, j
+or x, 54
+or y, $0xa918ce
+
+pop d
+psh c
+
+ret
+
+shl a
+asr b
+shr d
+
+stc
+sti
+stn
+stf
+sts
+ste
+stz
+
+sub i, j
+sub x, 54
+sub y, $0xa918ce
+
+xor i, j
+xor x, 54
+xor y, $0xa918ce
